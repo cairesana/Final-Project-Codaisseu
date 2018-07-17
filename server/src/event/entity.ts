@@ -14,7 +14,7 @@ export default class Event extends BaseEntity {
   name: string
 
   @IsString()
-  @MinLength(10)
+  @MinLength(5)
   @Column('text', {nullable:false})
   description: string
 
