@@ -17,10 +17,9 @@ export default class Comment extends BaseEntity {
 
     @IsString()
     @Column('text', {nullable:false})
-    nameAuthor: string
+    author: string
 
     @ManyToOne(_type => Ticket, ticket => ticket.comment)
-    tickets: Ticket[] 
+    ticket: Ticket 
 }
-
 

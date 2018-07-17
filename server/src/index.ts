@@ -1,11 +1,17 @@
 import 'reflect-metadata'
 import {createKoaServer} from "routing-controllers"
 import EventController from "./event/controller"
+import TicketController from './ticket/controller'
+import CommentController from './comment/controller'
 import setupDb from './db'
 
 
 const app = createKoaServer({
-   controllers: [EventController]
+    cors: true,
+    controllers: [
+       EventController, 
+       TicketController, 
+       CommentController]
 })
 
 setupDb()

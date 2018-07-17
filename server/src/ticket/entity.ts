@@ -9,10 +9,9 @@ export default class Ticket extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @Column('int', {nullable:false})
+  @Column('int')
   authorId: number
 
-  @IsString()
   @Column('text')  //opcional
   ticketPictureUrl: string 
 
@@ -24,14 +23,14 @@ export default class Ticket extends BaseEntity {
   @Column('int', {nullable:false})
   price: number
 
-  @ManyToOne(_type => Event, event => event.tickets)
+  @ManyToOne(_type => Event, event => event.ticket)
   event: Event;
 
-  @OneToMany(_type => Comment, comment => comment.tickets)
-  comment: Comment; 
-
-  
+  @OneToMany(_type => Comment, comment => comment.ticket, {eager:true})
+  comment: Comment[]; 
 
 }
+
+// testando eager:true
 
 

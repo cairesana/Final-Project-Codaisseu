@@ -7,7 +7,7 @@ import Ticket from '../ticket/entity';
 @Entity()
 export default class Event extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id?: number
+  Id?: number
 
   @IsString()
   @Column('text', {nullable:false})
@@ -27,9 +27,11 @@ export default class Event extends BaseEntity {
   @Column('date', {nullable:false})
   endDate: Date
 
-  @OneToMany(_type => Ticket, ticket => ticket.event)
-  tickets: Ticket[];
+  @OneToMany(_type => Ticket, ticket => ticket.event, {eager:true})
+  ticket: Ticket[];
 }
+
+// testando {eager:true} para juntar automaticamente quando carregar
 
 
 
