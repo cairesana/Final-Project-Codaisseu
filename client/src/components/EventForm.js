@@ -4,17 +4,18 @@ class EventForm extends PureComponent {
 	state = {}
 
 	handleSubmit = (e) => {
-		e.preventDefault()
+        debugger;
+        e.preventDefault()
 		this.props.onSubmit(this.state)
 	}
 
 	handleChange = (event) => {
-    const {name, value} = event.target
+        const {name, value} = event.target
 
-    this.setState({
-      [name]: value
-    })
-  }
+        this.setState({
+            [name]: value
+        })
+    }
 
 	render() {
 		return (

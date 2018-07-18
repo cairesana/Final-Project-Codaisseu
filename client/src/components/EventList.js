@@ -40,7 +40,8 @@ class EventList extends PureComponent {
                     </ul>
                 </div> ))}
 
-                <h1>Create a new event</h1>
+                <h2>Create a new event</h2>
+                <p>-- Please, fill in all fields --</p>
 
                 <EventForm onSubmit={this.createEvent} />
 
