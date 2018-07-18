@@ -10,7 +10,6 @@ class EventDetails extends PureComponent {
     render() {
         const { event } = this.props;
         if (!event) return null
-        debugger;
         return (
             <div>
                 <h1>{event.name}</h1>
