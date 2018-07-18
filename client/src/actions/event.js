@@ -4,6 +4,7 @@ const baseUrl = 'http://localhost:4000'
 
 export const FETCHED_DETAILED_EVENT = 'FETCHED_DETAILED_EVENT'
 export const FETCHED_ALL_EVENTS = 'FETCHED_ALL_EVENTS'
+export const ADD_EVENT = 'ADD_EVENT'
 
 export const fetchEvent = (eventId) => (dispatch) => {
   request
@@ -23,4 +24,14 @@ export const fetchAllEvents = () => (dispatch) => {
       payload: response.body.events
     }))
     .catch(err => alert(err))
+}
+
+export const createEvent = (event) => (dispatch) => {
+  request
+    .post(`${baseUrl}/events`)
+    .send(event)
+    .then(response => dispatch({
+      type: ADD_EVENT,
+      payload: response.body
+    }))
 }
