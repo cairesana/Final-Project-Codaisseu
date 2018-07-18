@@ -9,8 +9,8 @@ export default class Ticket extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @Column('int')
-  authorId: number
+  // @Column('int')
+  // authorId: number
 
   @Column('text')  //opcional
   ticketPictureUrl: string 
@@ -23,8 +23,8 @@ export default class Ticket extends BaseEntity {
   @Column('int', {nullable:false})
   price: number
 
-  @ManyToOne(_type => Event, event => event.ticket)
-  event: Event;
+  @ManyToOne(_type => Event, event => event.tickets)
+  event: number;
 
   @OneToMany(_type => Comment, comment => comment.ticket, {eager:true})
   comment: Comment[]; 

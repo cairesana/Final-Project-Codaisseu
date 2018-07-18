@@ -28,7 +28,8 @@ export default class Event extends BaseEntity {
   endDate: Date
 
   @OneToMany(_type => Ticket, ticket => ticket.event, {eager:true})
-  ticket: Ticket[];
+  tickets: Ticket[];
+
 }
 
 // testando {eager:true} para juntar automaticamente quando carregar

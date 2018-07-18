@@ -22,11 +22,13 @@ export default class TicketController {
 
     //creates a ticket
     //@Authorized //mudar aqui depois que criar o login
-    @Post('/tickets')
+    @Post('/tickets/:id')
     @HttpCode(201)
     createTicket(
-        @Body() ticket: Ticket
+        @Body() ticket: Ticket,
+        @Param('id') id: number
     ) {
+        ticket.event = Number(id);
         return ticket.save()
     } // test: http post :4000/tickets author_id=1 ticket_picture_url="" description="buy now another summer festival" price=40 event_id=4
      
