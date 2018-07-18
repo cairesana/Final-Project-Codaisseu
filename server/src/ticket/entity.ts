@@ -27,8 +27,7 @@ export default class Ticket extends BaseEntity {
   event: number;
 
   @OneToMany(_type => Comment, comment => comment.ticket, {eager:true})
-  comment: Comment[]; 
-
+  comments: Comment[]; 
 }
 
 // testando eager:true

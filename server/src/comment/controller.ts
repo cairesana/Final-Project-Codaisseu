@@ -23,16 +23,16 @@ export default class CommentController {
 
     // creates a new comment 
     //@Authorized
-    @Post('/comments')
+    @Post('/comments/:id')
     @HttpCode(201)
         createComment(
-        @Body() comment: Comment
+        @Body() comment: Comment,
+        @Param('id') id: number
         ) {
+            comment.ticket = id;
             return comment.save()
         }  //tested: http post :4000/comments content='nicest festival ever, also trusted  seller' author='rodrigo' tickets_id=8
-             // ticket id nao atualiza na db
-
-
+             // ticket id nao atualiza na d
 }
 
 

@@ -8,13 +8,7 @@ class TicketForm extends PureComponent {
 		this.props.onSubmit(this.state)
     }
     
-    // componentWillMount() {
-    //     this.setState({
-    //         ["event_id"]: this.props.eventId
-    //     })
-    // }
-
-	handleChange = (event) => {
+   	handleChange = (event) => {
     const {name, value} = event.target
 
     this.setState({
@@ -45,8 +39,6 @@ class TicketForm extends PureComponent {
 						this.state.price || ''
 					} onChange={ this.handleChange } />
 				</div><br/>
-
-                {/* <input type="hidden" name="event_id" id="event_id" value={this.props.eventId} /> */}
 
 			    <button type="submit">Save</button>
 			</form>

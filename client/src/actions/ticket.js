@@ -2,19 +2,19 @@ import * as request from 'superagent'
 
 const baseUrl = 'http://localhost:4000'
 
-// export const FETCHED_DETAILED_TICKET = 'FETCHED_DETAILED_TICKET'
+export const FETCHED_DETAILED_TICKET = 'FETCHED_DETAILED_TICKET'
 // export const FETCHED_ALL_TICKETS = 'FETCHED_ALL_TICKETS'
 export const ADD_TICKET = 'ADD_TICKET'
 
-// export const fetchTicket = (ticketId) => (dispatch) => {
-//   request
-//     .get(`${baseUrl}/tickets/${ticketId}`)
-//     .then(response => dispatch({
-//       type: FETCHED_DETAILED_TICKET,
-//       payload: response.body
-//     }))
-//     .catch(err => alert(err))
-// }
+export const fetchTicket = (ticketId) => (dispatch) => {
+  request
+    .get(`${baseUrl}/tickets/${ticketId}`)
+    .then(response => dispatch({
+      type: FETCHED_DETAILED_TICKET,
+      payload: response.body
+    }))
+    .catch(err => alert(err))
+}
 
 // export const fetchAllTickets = () => (dispatch) => {
 //   request

@@ -19,7 +19,7 @@ export default class Comment extends BaseEntity {
     @Column('text', {nullable:false})
     author: string
 
-    @ManyToOne(_type => Ticket, ticket => ticket.comment)
-    ticket: Ticket 
+    @ManyToOne(_type => Ticket, ticket => ticket.comments)
+    ticket: number
 }
 

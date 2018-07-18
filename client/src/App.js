@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import EventList from './components/EventList';
 import EventDetails from './components/EventDetails';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import TicketDetails from './components/TicketDetails';
 
 
 
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path="/events" component={EventList} />
               <Route exact path="/events/:id" component={EventDetails} />
               <Route exact path="/" render={ () => <Redirect to="/events" /> } />
+              <Route exact path="/ticket/:id" component={TicketDetails} />
             </div>
           </Router>
       </div>

@@ -5,7 +5,7 @@ export default function (state = [], action) {
     case ADD_TICKET:
       return [...state, action.payload]
 
-    // default:
-    //   return state
+    default:
+      return state
   }
 }

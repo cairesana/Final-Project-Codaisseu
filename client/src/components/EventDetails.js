@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {fetchEvent} from '../actions/event';
 import {createTicket} from '../actions/ticket';
 import TicketForm from './TicketForm';
+import {Link} from 'react-router-dom';
 
 class EventDetails extends PureComponent {
     createTicket = (ticket) => {
@@ -25,9 +26,11 @@ class EventDetails extends PureComponent {
                 {<p>Start Date: {event.startDate}</p>}
                 {<p>End Date: {event.endDate}</p>}
 
+                <h2>Tickets for sale:</h2>
                 { event.tickets.map(ticket => (<div key={ticket.id}>
-                  <h2>{ticket.description}</h2>
-                  <p>{ticket.price}</p>
+                    <Link to={`/ticket/${ticket.id}`}>{ticket.description}</Link>
+                    <p>Price: {ticket.price}</p>
+                    <img src={ticket.ticketPictureUrl} alt=""/>
                 </div> ))}
 
                 <h2>Create a ticket to sell</h2>
