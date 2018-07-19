@@ -4,7 +4,6 @@ class EventForm extends PureComponent {
 	state = {}
 
 	handleSubmit = (e) => {
-        debugger;
         e.preventDefault()
 		this.props.onSubmit(this.state)
 	}

@@ -2,9 +2,9 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
-//import './style.css';
 import {fetchAllEvents, createEvent} from '../actions/event'
 import EventForm from './EventForm';
+//import './style.css';
 
 class EventList extends PureComponent {
     static propTypes = {
@@ -43,7 +43,9 @@ class EventList extends PureComponent {
                 <h2>Create a new event</h2>
                 <p>-- Please, fill in all fields --</p>
 
-                <EventForm onSubmit={this.createEvent} />
+                { this.props.currentUser && <EventForm onSubmit={this.createEvent} /> } 
+                { !this.props.currentUser && <p>Please <Link to="/login">login</Link></p >}
+                {/* linhas 46 e 47 adicionado hoje, testando para logados */}
 
           </div>
         )
@@ -52,13 +54,12 @@ class EventList extends PureComponent {
 
 const mapStateToProps = function (state) {
     return {
-        events: state.events
+        events: state.events,
+        currentUser: state.currentUser //adicionado hj e testando - autorizando apenas logados
     }
 }
       
 export default connect(mapStateToProps, { fetchAllEvents, createEvent })(EventList)
-
-     
 
 // { events.map(event => (<div key={event.id}>
 //     <h2>{event.name}</h2>

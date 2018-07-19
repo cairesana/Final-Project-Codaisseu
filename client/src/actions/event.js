@@ -26,9 +26,13 @@ export const fetchAllEvents = () => (dispatch) => {
     .catch(err => alert(err))
 }
 
-export const createEvent = (event) => (dispatch) => {
+export const createEvent = (event) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
   request
     .post(`${baseUrl}/events`)
+    .set('Authorization', `Bearer ${jwt}`)
     .send(event)
     .then(response => dispatch({
       type: ADD_EVENT,

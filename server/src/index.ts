@@ -1,9 +1,13 @@
 import 'reflect-metadata'
-import {createKoaServer} from "routing-controllers"
+import {createKoaServer, Action} from "routing-controllers"
 import EventController from "./event/controller"
 import TicketController from './ticket/controller'
 import CommentController from './comment/controller'
 import setupDb from './db'
+import UserController from './user/controller';
+import LoginController from './logins/controller';
+import { verify } from './jwt';
+
 
 
 const app = createKoaServer({
@@ -11,7 +15,20 @@ const app = createKoaServer({
     controllers: [
        EventController, 
        TicketController, 
-       CommentController]
+       CommentController, 
+       UserController,
+       LoginController
+    ],
+    authorizationChecker: (action: Action) => {
+      const header: string = action.request.headers.authorization
+    
+      if (header && header.startsWith('Bearer ')) {
+        const [ , token ] = header.split(' ')
+        return !!(token && verify(token))
+      }
+      // ...
+      return false
+    }
 })
 
 setupDb()
@@ -20,3 +37,6 @@ setupDb()
   )
   .catch(err => console.error(err))
 
+
+  
+  

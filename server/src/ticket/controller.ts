@@ -32,9 +32,6 @@ export default class TicketController {
         return ticket.save()
     } // test: http post :4000/tickets author_id=1 ticket_picture_url="" description="buy now another summer festival" price=40 event_id=4
      
-    // nao esta funcionando pelo terminal.. 
-
-
      //update edit ticket
      //@Authorized
      @Put('/tickets/:id')

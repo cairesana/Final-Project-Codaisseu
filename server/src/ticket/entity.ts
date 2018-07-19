@@ -3,6 +3,7 @@ import { BaseEntity } from 'typeorm/repository/BaseEntity';
 import { IsString, MinLength } from 'class-validator';
 import Event from '../event/entity';
 import Comment from '../comment/entity';
+// import User from '../user/entity';
 
 @Entity()
 export default class Ticket extends BaseEntity {
@@ -28,6 +29,9 @@ export default class Ticket extends BaseEntity {
 
   @OneToMany(_type => Comment, comment => comment.ticket, {eager:true})
   comments: Comment[]; 
+
+  // @ManyToOne(_Type => User, user => user.tickets)
+  // user: number;  //consertar depois...
 }
 
 // testando eager:true

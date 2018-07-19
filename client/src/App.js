@@ -5,6 +5,8 @@ import EventList from './components/EventList';
 import EventDetails from './components/EventDetails';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TicketDetails from './components/TicketDetails';
+import LoginPage from './components/LoginPage'
+// import SignUpPage from './components/SignUpPage'
 
 
 
@@ -22,6 +24,8 @@ class App extends Component {
               <Route exact path="/events/:id" component={EventDetails} />
               <Route exact path="/" render={ () => <Redirect to="/events" /> } />
               <Route exact path="/ticket/:id" component={TicketDetails} />
+              <Route exact path="/login" component={LoginPage} />
+              {/* <Route exact path="/signup" component={SignUpPage} /> */}
             </div>
           </Router>
       </div>
