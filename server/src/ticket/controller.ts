@@ -15,7 +15,7 @@ export default class TicketController {
     getTicket(
         @Param('id') id: number
     ) {
-        return Ticket.findOne(id, {relations:["user"]})
+        return Ticket.findOne(id, {relations:["user", "event"]})
     }  // tested: http :4000/tickets/8
 
     @Get('/tickets/byuser/:userId')

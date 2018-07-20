@@ -25,9 +25,35 @@ class TicketDetails extends PureComponent {
         let riskPercentage = 5;
         let myTicket = ticket;
         const totalTickets = myTicket ? myTicket.user.tickets.length : 0;
+        const allTicketsFromEvent = myTicket ? myTicket.event.tickets : 0;
 
         if (totalTickets === 1) {
             riskPercentage += 10;
+        }
+
+        if (allTicketsFromEvent) {
+            // console.log(allTicketsFromEvent);
+            let totalPrice = 0;
+            let averagePrice = 0;
+            let percentageDifference = 0;
+
+            for (let i = 0; i < allTicketsFromEvent.length; i++) {
+                totalPrice += allTicketsFromEvent[i].price;   
+            }
+
+            averagePrice = totalPrice / allTicketsFromEvent.length;
+            percentageDifference = (((averagePrice - ticket.price) / averagePrice) * 100);
+
+            if (ticket.price < averagePrice) {
+                riskPercentage += percentageDifference;
+            } else {
+                percentageDifference = percentageDifference * -1; // converte para positivo
+                if (percentageDifference > 10) { 
+                    riskPercentage -= 10;
+                } else {
+                    riskPercentage -= percentageDifference;
+                }
+            }
         }
 
         return (
