@@ -1,14 +1,13 @@
-import { JsonController, Get, Param, Body, NotFoundError, Put, Post, HttpCode } from 'routing-controllers'
+import { JsonController, Get, Param, Body, NotFoundError, Put, Post, HttpCode, Authorized } from 'routing-controllers'
 import Ticket from './entity'
 
 
 @JsonController()
 export default class TicketController {
 
-    //endpoint that returns all tickets
     @Get('/tickets')
     async allTickets() {
-        const tickets = await Ticket.find()
+        const tickets = await Ticket.find({relations:["user"]})
         return { tickets }
     } //tested: http :4000/tickets
 
@@ -16,23 +15,30 @@ export default class TicketController {
     getTicket(
         @Param('id') id: number
     ) {
-        return Ticket.findOne(id)
-    }  // test: http :4000/tickets/8
+        return Ticket.findOne(id, {relations:["user"]})
+    }  // tested: http :4000/tickets/8
 
+    @Get('/tickets/byuser/:userId')
+    getTicketByUser(
+        @Param('userId') userId:number
+    ) {
+        const conditions = {where: {user: userId}}
+        return Ticket.findAndCount(conditions)
+    }
 
-    //creates a ticket
-    //@Authorized //mudar aqui depois que criar o login
-    @Post('/tickets/:id')
+    @Authorized()
+    @Post('/tickets/:id/:userId')
     @HttpCode(201)
     createTicket(
         @Body() ticket: Ticket,
-        @Param('id') id: number
+        @Param('id') id: number,
+        @Param('userId') userId: number
     ) {
         ticket.event = Number(id);
+        ticket.user = Number(userId);
         return ticket.save()
-    } // test: http post :4000/tickets author_id=1 ticket_picture_url="" description="buy now another summer festival" price=40 event_id=4
+    } // tested: http post :4000/tickets/1/1 ticketPictureUrl="http://oxydy.com/wp-content/uploads/2018/02/test-img-300x194.png" description="buy now another summer festival" price=40
      
-     //update edit ticket
      //@Authorized
      @Put('/tickets/:id')
      async updateTicket(

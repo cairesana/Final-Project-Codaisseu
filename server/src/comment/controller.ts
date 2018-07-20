@@ -1,18 +1,16 @@
-import { JsonController, Get, Param, Body, Post, HttpCode } from 'routing-controllers'
+import { JsonController, Get, Param, Body, Post, HttpCode, Authorized } from 'routing-controllers'
 import Comment from './entity'
 
 
 @JsonController()
 export default class CommentController {
 
-    // endpoint that returns all the comments 
     @Get('/comments')
     async allComments() {
         const comments = await Comment.find()
         return { comments }
     } //test: http :4000/comments
 
-    // finds comment by id
     @Get('/comments/:id')
     getComment(
         @Param('id') id: number
@@ -21,8 +19,7 @@ export default class CommentController {
     }  // test: http :4000/comments/1  
      
 
-    // creates a new comment 
-    //@Authorized
+    @Authorized()
     @Post('/comments/:id')
     @HttpCode(201)
         createComment(
@@ -31,8 +28,7 @@ export default class CommentController {
         ) {
             comment.ticket = id;
             return comment.save()
-        }  //tested: http post :4000/comments content='nicest festival ever, also trusted  seller' author='rodrigo' tickets_id=8
-             // ticket id nao atualiza na d
+        }  //test: http post :4000/comments content='nicest festival ever, also trusted  seller' author='rodrigo' tickets_id=8
 }
 
 

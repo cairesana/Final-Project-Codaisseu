@@ -13,8 +13,8 @@ export const login = (email, password) => (dispatch) => {
 		.send({ email, password })
 		.then(result => {
 			dispatch({
-			type: USER_LOGIN_SUCCESS,
-			payload: result.body
+				type: USER_LOGIN_SUCCESS,
+				payload: result.body
 			})
 		})
 		.catch(err => {

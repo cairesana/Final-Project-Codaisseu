@@ -3,7 +3,7 @@ import * as request from 'superagent'
 const baseUrl = 'http://localhost:4000'
 
 export const FETCHED_DETAILED_TICKET = 'FETCHED_DETAILED_TICKET'
-// export const FETCHED_ALL_TICKETS = 'FETCHED_ALL_TICKETS'
+export const FETCHED_ALL_TICKETS = 'FETCHED_ALL_TICKETS'
 export const ADD_TICKET = 'ADD_TICKET'
 
 export const fetchTicket = (ticketId) => (dispatch) => {
@@ -16,19 +16,23 @@ export const fetchTicket = (ticketId) => (dispatch) => {
     .catch(err => alert(err))
 }
 
-// export const fetchAllTickets = () => (dispatch) => {
-//   request
-//     .get(`${baseUrl}/tickets/`)
-//     .then(response => dispatch({
-//       type: FETCHED_ALL_TICKETS,
-//       payload: response.body.tickets
-//     }))
-//     .catch(err => alert(err))
-// }
-
-export const createTicket = (ticket, eventId) => (dispatch) => {
+export const fetchAllTickets = () => (dispatch) => {
   request
-    .post(`${baseUrl}/tickets/${eventId}`)
+    .get(`${baseUrl}/tickets/`)
+    .then(response => dispatch({
+      type: FETCHED_ALL_TICKETS,
+      payload: response.body.tickets
+    }))
+    .catch(err => alert(err))
+}
+
+export const createTicket = (ticket, eventId, user) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  request
+    .post(`${baseUrl}/tickets/${eventId}/${user}`)
+    .set('Authorization', `Bearer ${jwt}`)
     .send(ticket)
     .then(response => dispatch({
       type: ADD_TICKET,

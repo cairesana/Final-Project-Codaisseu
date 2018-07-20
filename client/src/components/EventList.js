@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom'
 import {fetchAllEvents, createEvent} from '../actions/event'
 import EventForm from './EventForm';
-//import './style.css';
 
 class EventList extends PureComponent {
     static propTypes = {
@@ -32,20 +31,24 @@ class EventList extends PureComponent {
         return (
           <div>
             <h1>All events</h1>
-              
-                { events.map(event => (<div key={event.Id}>
-                    <ul>
-                        <Link to={`/events/${event.Id}`}><h2>{event.name}</h2></Link>
-                        <img src={event.pictureUrl} alt=""/>
-                    </ul>
-                </div> ))}
+                <ul className="event-list">
+                    { events.map(event => (
+                            <Link className="event" key={event.Id} to={`/events/${event.Id}`}>
+                                <li className="event-item">
+                                    <h2 className="event-title">{event.name}</h2>
+                                    <img src={event.pictureUrl} alt=""/> 
+                                </li>
+                            </Link>
+                    ))}
+                </ul>
 
-                <h2>Create a new event</h2>
-                <p>-- Please, fill in all fields --</p>
+                <br/>
+
+                { this.props.currentUser && <h2>Create a new event</h2> }
+                { this.props.currentUser && <p>-- Please, fill in all fields --</p> }
 
                 { this.props.currentUser && <EventForm onSubmit={this.createEvent} /> } 
-                { !this.props.currentUser && <p>Please <Link to="/login">login</Link></p >}
-                {/* linhas 46 e 47 adicionado hoje, testando para logados */}
+                { !this.props.currentUser && <h2>To create a new event, please <Link to="/login">login</Link></h2 >}
 
           </div>
         )
@@ -55,13 +58,8 @@ class EventList extends PureComponent {
 const mapStateToProps = function (state) {
     return {
         events: state.events,
-        currentUser: state.currentUser //adicionado hj e testando - autorizando apenas logados
+        currentUser: state.currentUser 
     }
 }
       
 export default connect(mapStateToProps, { fetchAllEvents, createEvent })(EventList)
-
-// { events.map(event => (<div key={event.id}>
-//     <h2>{event.name}</h2>
-//     <img src={event.pictureUrl} alt=""/>
-//     </div> ))}

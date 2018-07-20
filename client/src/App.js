@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import EventList from './components/EventList';
 import EventDetails from './components/EventDetails';
@@ -15,8 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to Uber-Tickets!</h1>
         </header>
           <Router>
             <div>
