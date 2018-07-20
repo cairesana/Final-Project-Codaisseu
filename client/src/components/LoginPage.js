@@ -19,13 +19,13 @@ class LoginPage extends PureComponent {
 				<h1>Login</h1>
 
 				<LoginForm onSubmit={this.handleSubmit} />
-                <p>{this.props.login.error}</p>  {/*state login error. We show an error if the login was not successful*/}
-			</div>
+				<p>{this.props.login.error}</p> 
+				</div>
 		)
 	}
 }
 
-    const mapStateToProps = function (state) {
+	const mapStateToProps = function (state) {
         return {
             currentUser: state.currentUser,
             login: state.login.error  

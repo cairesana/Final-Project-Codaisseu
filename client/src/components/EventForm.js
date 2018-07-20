@@ -44,14 +44,14 @@ class EventForm extends PureComponent {
 					<label htmlFor="startDate"> Start date: </label>
 					<input name="startDate" id="startDate" value={
 						this.state.startDate || ''
-					} onChange={ this.handleChange } />
+					} onChange={ this.handleChange } placeholder="YYYY-MM-DD"/>
 				</div><br/>
 
                 <div>
 					<label htmlFor="endDate"> End date: </label>
 					<input name="endDate" id="endDate" value={
 						this.state.endDate || ''
-					} onChange={ this.handleChange } />
+					} onChange={ this.handleChange } placeholder="YYYY-MM-DD" />
 				</div><br/>
 
 				

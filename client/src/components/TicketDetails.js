@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import { connect } from 'react-redux';
-import {fetchTicket, fetchAllTickets} from '../actions/ticket';
+import {fetchTicket} from '../actions/ticket';
 import CommentForm from './CommentForm';
 import {createComment} from '../actions/comment';
 import {Link} from 'react-router-dom';
@@ -22,7 +22,7 @@ class TicketDetails extends PureComponent {
 
         if (!ticket) return null
     
-        let riskPercentage = 0;
+        let riskPercentage = 5;
         let myTicket = ticket;
         const totalTickets = myTicket ? myTicket.user.tickets.length : 0;
 
@@ -37,6 +37,7 @@ class TicketDetails extends PureComponent {
                 <img src={ticket.ticketPictureUrl} alt=""/>
                 {<p>Description: {ticket.description}</p>}
                 {<p>Price: {ticket.price}</p>}
+                {<p>Seller: {ticket.user.firstName}</p>}
                 {<p>We calculated that the risk of this ticket being a fraud is {riskPercentage}%</p>}
                 
                 <br/>
@@ -66,4 +67,4 @@ class TicketDetails extends PureComponent {
         }
     }
 
-export default connect(mapStateToProps, {fetchTicket, createComment, fetchAllTickets})(TicketDetails)
+export default connect(mapStateToProps, {fetchTicket, createComment})(TicketDetails)
