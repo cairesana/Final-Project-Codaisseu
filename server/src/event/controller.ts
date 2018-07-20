@@ -18,7 +18,7 @@ export default class EventController {
         @Param('id') id: number
     ) {
         return Event.findOne(id)
-    } // tested: http :4000/events/1   -- id 3 not found error -- precisa do catch error?
+    } // tested: http :4000/events/1   -- id 3 not found error
 
     //endpoint that creates an event
     @Authorized()

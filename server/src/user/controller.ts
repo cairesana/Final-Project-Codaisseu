@@ -26,7 +26,7 @@ export default class UserController {
       if (!user) throw new NotFoundError('Cannot find user')
     
       return User.merge(user, update).save()
-    } //precisa atualizar users? 
+    } 
 
     @Post('/users')
     @HttpCode(201)
