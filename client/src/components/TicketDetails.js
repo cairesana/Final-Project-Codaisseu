@@ -44,17 +44,44 @@ class TicketDetails extends PureComponent {
             averagePrice = totalPrice / allTicketsFromEvent.length;
             percentageDifference = (((averagePrice - ticket.price) / averagePrice) * 100);
 
-            if (ticket.price < averagePrice) {
-                riskPercentage += percentageDifference;
+            if (ticket.price < averagePrice) { // ticket x% cheaper than the average price
+                riskPercentage += percentageDifference;  //add x% to the risk
             } else {
-                percentageDifference = percentageDifference * -1; // converte para positivo
-                if (percentageDifference > 10) { 
-                    riskPercentage -= 10;
+                percentageDifference = percentageDifference * -1; // convertendo resultado neg para positivo 
+                if (percentageDifference > 10) { // ticket is x% more expensive than average price
+                    riskPercentage -= 10; // deduct a maximum of 10*
                 } else {
                     riskPercentage -= percentageDifference;
                 }
             }
         }
+
+        // Check what time the ticket was created
+        const createdTime = ticket.created.split('T')[1];
+        const createdHour = parseInt(createdTime.substring(0, 2)); // Pega so a hora porque nao e possivel comparar se string eh maior ou menor
+        console.log(createdHour);
+
+        if (createdHour >= 9 && createdHour <= 17) {
+            riskPercentage -= 10;
+        } else {
+            riskPercentage += 10;
+        }
+
+        // Check the amount of comments
+        if (ticket.comments.length > 3) {
+            riskPercentage += 5;
+        }
+
+        //ckecks final values (minimal risk of 5 and a maximum risk of 95)
+        if (riskPercentage < 5) {
+            riskPercentage = 5;
+        }
+        if (riskPercentage > 95) {
+            riskPercentage = 95;
+        }
+
+        riskPercentage = parseInt(riskPercentage);
+
 
         return (
             <div>

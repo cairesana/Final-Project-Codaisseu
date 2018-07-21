@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, Timestamp } from 'typeorm'
 import { BaseEntity } from 'typeorm/repository/BaseEntity';
 import { IsString, MinLength } from 'class-validator';
 import Event from '../event/entity';
@@ -31,5 +31,8 @@ export default class Ticket extends BaseEntity {
   comments: Comment[]; 
 
   @ManyToOne(_Type => User, user => user.tickets)
-  user: number; 
+  user: number;
+
+  @Column('timestamp', {default: () => "CURRENT_TIMESTAMP"})
+  created: Timestamp;
 }
