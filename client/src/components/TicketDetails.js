@@ -58,8 +58,8 @@ class TicketDetails extends PureComponent {
 
         // Check what time the ticket was created
         const createdTime = ticket.created.split('T')[1];
-        const createdHour = parseInt(createdTime.substring(0, 2)); // Pega so a hora porque nao e possivel comparar se string eh maior ou menor
-        console.log(createdHour);
+        const createdHour = parseInt(createdTime.substring(0, 2),10); // Pega so a hora porque nao e possivel comparar se string eh maior ou menor
+        //console.log(createdHour);
 
         if (createdHour >= 9 && createdHour <= 17) {
             riskPercentage -= 10;
@@ -80,7 +80,7 @@ class TicketDetails extends PureComponent {
             riskPercentage = 95;
         }
 
-        riskPercentage = parseInt(riskPercentage);
+        riskPercentage = parseInt(riskPercentage, 10);
 
 
         return (
@@ -91,6 +91,7 @@ class TicketDetails extends PureComponent {
                 {<p>Description: {ticket.description}</p>}
                 {<p>Price: {ticket.price}</p>}
                 {<p>Seller: {ticket.user.firstName}</p>}
+                {<p>Created at: {ticket.created}</p>}
                 {<p>We calculated that the risk of this ticket being a fraud is {riskPercentage}%</p>}
                 
                 <br/>

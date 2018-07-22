@@ -1,8 +1,8 @@
 import events from './events'
 import event from './event'
-import tickets from './tickets'
+// import tickets from './tickets'
 import ticket from './ticket'
-import comments from './comments'
+// import comments from './comments'
 import login from './login'
 import currentUser from './currentUser'
 // import signup from './signup'
@@ -10,9 +10,9 @@ import currentUser from './currentUser'
 export default {
     events,
     event,
-    tickets,
+    // tickets,
     ticket,
-    comments,
+    // comments,
     login,
     currentUser
     // signup
